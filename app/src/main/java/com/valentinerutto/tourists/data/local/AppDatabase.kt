@@ -7,6 +7,6 @@ import com.valentinerutto.tourists.data.local.dao.TouristDao
 
 @Database(exportSchema = true, version = 1, entities = [TouristEntity::class])
 abstract class AppDatabase: RoomDatabase() {
-    abstract val touristDao: TouristDao
+    abstract fun touristDao(): TouristDao
     class MyAutomigration: AutoMigrationSpec{}
 }
