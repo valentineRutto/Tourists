@@ -1,4 +1,12 @@
 package com.valentinerutto.tourists.data.local
 
-class AppDatabase {
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.migration.AutoMigrationSpec
+import com.valentinerutto.tourists.data.local.dao.TouristDao
+
+@Database(exportSchema = true, version = 1, entities = [TouristEntity::class])
+abstract class AppDatabase: RoomDatabase() {
+    abstract val touristDao: TouristDao
+    class MyAutomigration: AutoMigrationSpec{}
 }
