@@ -39,9 +39,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    kotlin {
+        jvmToolchain(8)
+    }
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
@@ -71,7 +75,7 @@ dependencies {
     // Room
     implementation ("androidx.room:room-runtime:2.5.2")
     implementation( "androidx.room:room-ktx:2.5.2")
-    //kapt("androidx.room:room-compiler:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
 
     // Retrofit,Gson
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
@@ -80,6 +84,7 @@ dependencies {
 
     // Koin for DI
     implementation ("io.insert-koin:koin-android:3.2.0")
+    implementation ("io.insert-koin:koin-androidx-compose::3.2.0")
 
     // Compose Navigation
     implementation("androidx.navigation:navigation-compose:2.7.0")
