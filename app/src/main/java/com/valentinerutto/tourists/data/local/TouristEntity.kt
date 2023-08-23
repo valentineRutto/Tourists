@@ -4,8 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "touristList")
-data class TouristEntity (@PrimaryKey
-                        val  id:Int,
-                          val name:String,val email:String,val location:String,
+data class TouristEntity(
+    @PrimaryKey val id: Int,
+    val name: String, val email: String, val location: String,
 
-)
+    )

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Tourists</string>
+    <string name="tourists">Tourists</string>
+    <string name="newsfeed">News</string>
 </resources>

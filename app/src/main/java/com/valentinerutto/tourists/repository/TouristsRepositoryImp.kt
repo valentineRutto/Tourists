@@ -12,13 +12,13 @@ import java.net.UnknownHostException
 class TouristsRepositoryImpl(
     private val apiService: ApiService,
     private val touristDao: TouristDao
-) {
+):TouristsRepository {
 
-    suspend fun getTouristList(): NetworkResult<List<TouristEntity>> = try {
+   override suspend fun getTouristList(): NetworkResult<List<TouristEntity>> = try {
         val response = apiService.getTouristList(2)
+
         when {
             response.isSuccessful -> {
-
                 val touristsData = response.body()!!.data.map {
                     TouristEntity(
                         id = it.id,
@@ -54,5 +54,5 @@ class TouristsRepositoryImpl(
         }
     }
 
-    fun getSavedTourists(): LiveData<List<TouristEntity>> = touristDao.getTouristsList()
+   override fun getSavedTourists(): LiveData<List<TouristEntity>> = touristDao.getTouristsList()
 }
