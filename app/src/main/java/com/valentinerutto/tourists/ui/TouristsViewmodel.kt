@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.valentinerutto.tourists.data.local.TouristEntity
 import com.valentinerutto.tourists.repository.TouristsRepository
-import com.valentinerutto.tourists.repository.TouristsRepositoryImpl
 import com.valentinerutto.tourists.util.NetworkResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

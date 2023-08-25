@@ -12,7 +12,7 @@ import com.valentinerutto.tourists.ui.TouristsViewmodel
 fun NavHost(
   modifier: Modifier = Modifier,
   navController: NavHostController = rememberNavController(),
- // touristsViewmodel: TouristsViewmodel
+  touristsViewmodel: TouristsViewmodel
 ) {
   NavHost(
     navController = navController,
@@ -21,19 +21,21 @@ fun NavHost(
   ) {
 
     composable(Screen.TouristsList.route) {
-//      CharactersListScreen(
-//        touristsViewmodel = touristsViewmodel,
-//        onCharacterSelected = { characterItemPosition ->
-//          val route = Screen.TouristDetails.createRoute(characterItemPosition)
-//          navController.navigate(route)
-//        },
-//        modifier = modifier
-//      )
+
+
+        TouristsListScreen(
+            touristsViewmodel = touristsViewmodel,
+        onTouristSelected = { touristItemPosition ->
+          val route = Screen.TouristDetails.createRoute(touristItemPosition)
+          navController.navigate(route)
+        },
+        modifier = modifier
+      )
     }
 
     composable(Screen.TouristDetails.route) { backStackEntry ->
-//      val characterItemPosition =
-//        backStackEntry.arguments?.getString("characterItemPosition")?.toInt() ?: 0
+     val touristItemPosition =
+        backStackEntry.arguments?.getString("touristItemPosition")?.toInt() ?: 0
 //      CharacterDetailsScreen(
 //        characterViewModel = characterViewModel,
 //        characterItemPosition = characterItemPosition

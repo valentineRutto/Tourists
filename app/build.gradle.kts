@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 
 plugins {
     id("com.android.application")
@@ -43,14 +42,7 @@ android {
     kotlin {
         jvmToolchain(8)
     }
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_17
-//        targetCompatibility = JavaVersion.VERSION_17
-//    }
 
-//    kotlinOptions{
-//        jvmTarget= "17"
-//    }
     buildFeatures {
         compose = true
     }
@@ -74,6 +66,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
     // Material 3
     implementation( "androidx.compose.material3:material3-window-size-class:1.2.0-alpha05")
@@ -88,8 +81,8 @@ dependencies {
 
             implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
             implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-            kapt("androidx.room:room-compiler:2.5.2")
             annotationProcessor("androidx.room:room-compiler:2.5.2")
+            kapt("androidx.room:room-compiler:2.5.2")
             implementation ("androidx.room:room-ktx:2.5.2")
             implementation ("androidx.room:room-runtime:2.5.2")
 
@@ -99,9 +92,8 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     // Koin for DI
-    implementation ("io.insert-koin:koin-android:3.4.3")
     implementation ("io.insert-koin:koin-androidx-compose:3.4.6")
-    implementation ("io.insert-koin:koin-androidx-compose-navigation:3.4.6")
+    implementation ("io.insert-koin:koin-android:3.4.6")
 
     // Compose Navigation
     implementation("androidx.navigation:navigation-compose:2.7.0")

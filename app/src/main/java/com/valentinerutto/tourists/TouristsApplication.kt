@@ -15,7 +15,6 @@ class TouristsApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
-        // val modules = listOf(networkingModule, databaseModule, repositoryModule, viewModelModule)
 
         startKoin {
             androidLogger(level = Level.DEBUG)
