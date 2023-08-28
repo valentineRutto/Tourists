@@ -40,7 +40,7 @@ fun TouristsListScreen(
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
 
         item {
-            //  Header("Tourists")
+              Text("Tourists")
             Spacer(modifier = Modifier.height(16.dp))
         }
 
@@ -65,7 +65,7 @@ fun TouristItem(
     Card(
         shape = RoundedCornerShape(14.dp), colors = CardDefaults.cardColors(
             containerColor =
-            MaterialTheme.colorScheme.primaryContainer
+            MaterialTheme.colorScheme.onTertiaryContainer
         ),
         modifier = Modifier
             .padding(10.dp)

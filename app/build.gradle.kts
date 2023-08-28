@@ -69,43 +69,37 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
 
     // Material 3
-    implementation( "androidx.compose.material3:material3-window-size-class:1.2.0-alpha05")
+    implementation("androidx.compose.material3:material3-window-size-class:1.2.0-alpha05")
     implementation("androidx.compose.material3:material3:1.2.0-alpha05")
     implementation("androidx.compose.material3:material3")
 
-    // Room
-//    implementation ("androidx.room:room-runtime:2.5.2")
-//    implementation( "androidx.room:room-ktx:2.5.2")
-//    kapt("androidx.room:room-compiler:2.5.2")
-//    annotationProcessor("androidx.room:room-compiler:2.5.2")
-
-            implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-            implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
-            annotationProcessor("androidx.room:room-compiler:2.5.2")
-            kapt("androidx.room:room-compiler:2.5.2")
-            implementation ("androidx.room:room-ktx:2.5.2")
-            implementation ("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    // room DataBase Handler
+    implementation("androidx.room:room-runtime:2.5.2")
+    ksp("androidx.room:room-compiler:2.5.2")
+    implementation("androidx.room:room-ktx:2.5.2")
 
     // Retrofit,Gson
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     // Koin for DI
-    implementation ("io.insert-koin:koin-androidx-compose:3.4.6")
-    implementation ("io.insert-koin:koin-android:3.4.6")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.6")
+    implementation("io.insert-koin:koin-android:3.4.3")
 
     // Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.0")
+    implementation("androidx.navigation:navigation-compose:2.7.1")
 
     // Coil
     implementation("io.coil-kt:coil-compose:2.4.0")
 
     // Timber library
-    implementation ("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     // Navigation
-    implementation ("androidx.navigation:navigation-compose:2.7.0")
+    implementation("androidx.navigation:navigation-compose:2.7.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

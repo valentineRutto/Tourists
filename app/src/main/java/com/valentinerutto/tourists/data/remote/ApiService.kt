@@ -8,10 +8,10 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("/Tourist")
+    @GET("/api/Tourist")
     suspend fun getTouristList(@Query("page") page:Int): Response<TouristsListResponse>
-    @GET("/Feed/GetNewsFeed")
+    @GET("/api/Feed/GetNewsFeed")
     suspend fun getNewsFeed(): Response<NewsFeedListResponse>
-    @GET("/Tourist/{id}")
+    @GET("/api/Tourist/{id}")
     suspend fun getTouristDetails(@Path("id") id : Int): Response<TouristsListResponse>
 }

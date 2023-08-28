@@ -26,7 +26,7 @@ class TouristsRepository(
                         location = it.touristLocation
                     )
                 }
-                saveAllTourists(touristsData)
+                touristDao.insert(touristsData)
                 NetworkResult.Success(touristsData)
 
             }
@@ -38,19 +38,6 @@ class TouristsRepository(
         NetworkResult.NoInternetError
     } catch (e: Exception) {
         NetworkResult.ServerError
-    }
-
-    private suspend fun saveAllTourists(tourists: List<TouristEntity>) {
-        val response = touristDao.saveAllTourists(tourists)
-        return when {
-            response.isEmpty() -> {
-                saveAllTourists(tourists)
-            }
-
-            else -> {
-                Timber.e("All tourists saved")
-            }
-        }
     }
 
     fun getSavedTourists(): LiveData<List<TouristEntity>> = touristDao.getTouristsList()

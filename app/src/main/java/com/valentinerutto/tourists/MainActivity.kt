@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TouristsTheme {
-                 val touristsViewmodel:TouristsViewmodel by viewModel<TouristsViewmodel>()
+                 val touristsViewmodel:TouristsViewmodel by inject()
 
                 val windowSizeClass = calculateWindowSizeClass(activity = this)
                 AppNavigationSetUp(

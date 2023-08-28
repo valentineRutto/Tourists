@@ -9,7 +9,7 @@ import androidx.room.Update
 @Dao
 interface BaseDao<T> {
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict= REPLACE)
     suspend fun insert(item: T)
 
     @Insert(onConflict = REPLACE)

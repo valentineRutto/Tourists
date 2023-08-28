@@ -8,7 +8,7 @@ import com.valentinerutto.tourists.data.local.dao.TouristDao
 import com.valentinerutto.tourists.util.Constants
 import kotlinx.coroutines.CoroutineScope
 
-@Database(exportSchema = true, version = 1, entities = [TouristEntity::class])
+@Database(exportSchema = false, version = 1, entities = [TouristEntity::class])
 abstract class AppDatabase: RoomDatabase() {
     abstract fun touristDao(): TouristDao
 
@@ -18,7 +18,7 @@ companion object {
     @Volatile
     private var INSTANCE: AppDatabase? = null
 
-    fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
+    fun getDatabase(context: Context): AppDatabase {
         // if the INSTANCE is not null, then return it,
         // if it is, then create the database
         return INSTANCE ?: synchronized(this) {

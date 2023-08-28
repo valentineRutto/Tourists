@@ -11,6 +11,4 @@ import com.valentinerutto.tourists.data.local.TouristEntity
 interface TouristDao: BaseDao<TouristEntity> {
     @Query("SELECT * FROM touristList")
      fun getTouristsList():LiveData<List<TouristEntity>>
-    @Insert()
-    suspend fun saveAllTourists(touristsList:List<TouristEntity>):List<TouristEntity>
 }

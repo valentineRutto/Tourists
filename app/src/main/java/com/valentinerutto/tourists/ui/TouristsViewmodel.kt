@@ -23,6 +23,4 @@ class TouristsViewmodel(private val touristsRepository: TouristsRepository):View
             is NetworkResult.ServerError -> ""
         }
     }
-
-
 }
