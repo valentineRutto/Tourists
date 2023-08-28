@@ -22,7 +22,6 @@ fun NavHost(
 
     composable(Screen.TouristsList.route) {
 
-
         TouristsListScreen(
             touristsViewmodel = touristsViewmodel,
         onTouristSelected = { touristItemPosition ->
@@ -36,14 +35,14 @@ fun NavHost(
     composable(Screen.TouristDetails.route) { backStackEntry ->
      val touristItemPosition =
         backStackEntry.arguments?.getString("touristItemPosition")?.toInt() ?: 0
-//      CharacterDetailsScreen(
-//        characterViewModel = characterViewModel,
-//        characterItemPosition = characterItemPosition
-//      )
+      TouristDetailScreen(
+        touristsViewmodel = touristsViewmodel,
+        touristItemPosition = touristItemPosition
+      )
     }
 
     composable(Screen.NewsFeedList.route) {
-    //  LocationsScreen()
+     NewsFeedListScreen(touristsViewmodel,modifier=modifier)
     }
 
   }

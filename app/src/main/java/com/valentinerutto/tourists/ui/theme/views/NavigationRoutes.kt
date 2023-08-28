@@ -6,5 +6,6 @@ sealed class Screen(val route: String) {
         fun createRoute(touristItemPosition: Int) = "touristDetails/$touristItemPosition"
     }
     object NewsFeedList : Screen("newsFeedList")
+
 }
 
