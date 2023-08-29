@@ -7,7 +7,9 @@ import com.valentinerutto.tourists.data.local.TouristEntity
 import com.valentinerutto.tourists.data.local.dao.NewsFeedDao
 import com.valentinerutto.tourists.data.local.dao.TouristDao
 import com.valentinerutto.tourists.data.remote.ApiService
+import com.valentinerutto.tourists.data.remote.model.newfeedlist.NewsFeedListResponse
 import com.valentinerutto.tourists.util.ErrorMessages.GENERAL_API_ERROR_MESSAGE
+import com.valentinerutto.tourists.util.Mapper
 import com.valentinerutto.tourists.util.NetworkResult
 import kotlinx.coroutines.delay
 import java.net.UnknownHostException
@@ -15,8 +17,7 @@ import java.net.UnknownHostException
 class TouristsRepository(
     private val apiService: ApiService,
     private val touristDao: TouristDao,
-    private val newsFeedDao: NewsFeedDao
-) {
+    private val newsFeedDao: NewsFeedDao) {
     suspend fun getTouristList(): NetworkResult<List<TouristEntity>> = try {
 
         val response = apiService.getTouristList(4)
@@ -46,49 +47,30 @@ class TouristsRepository(
         NetworkResult.ServerError
     }
 
-    suspend fun getNewsFeed(page: Int): NetworkResult<List<NewsFeedEntity>> = try {
+    suspend fun getNewsFeed(): NetworkResult<List<NewsFeedEntity>> {
 
-        val response = apiService.getNewsFeed(page)
+        val response = apiService.getNewsFeed()
+        val newsList = newsFeedDao.getnewsFeedList()
 
-        when {
-            response.isSuccessful -> {
+        if (newsList.isNotEmpty()) return NetworkResult.Success(newsList)
+        if (!response.isSuccessful) return NetworkResult.APIError(errorMessage = response.message())
+        val newsFeedEntity = response.body()?.let { mapToDomainModel(it) }
+        if (newsFeedEntity != null) {
+            newsFeedDao.insert(newsFeedEntity)
+        }
+        return NetworkResult.Success(data = newsFeedDao.getnewsFeedList())
 
-                val newssData = response.body()!!.data.map {
-                    NewsFeedEntity(
-                        id = it.id,
-                        commentCount = it.commentCount,
-                        title = it.title,
-                        description = it.description,
-                        userName = it.user.name,
-                        userPPic = it.user.profilepicture,
-                    )
-                }
-
-                newsFeedDao.insert(newssData)
-                NetworkResult.Success(newssData)
+    }
+        fun getSavedTourists(): LiveData<List<TouristEntity>> = touristDao.getTouristsList()
+     suspend   fun getSavedNewsFeed(): List<NewsFeedEntity> = newsFeedDao.getnewsFeedList()
+        suspend fun getItems(page: Int, pageSize: Int): Result<List<TouristList>> {
+            val response = apiService.getTouristList(page)
+            var totalpage = response.body()!!.totalPages
+            var touristlist = response.body()!!.data.map {
+                TouristList(id = it.id, name = it.touristName)
             }
 
-            else -> NetworkResult.APIError(GENERAL_API_ERROR_MESSAGE)
-
-        }
-
-
-    } catch (e: UnknownHostException) {
-        NetworkResult.NoInternetError
-    } catch (e: Exception) {
-        NetworkResult.ServerError
-    }
-
-    fun getSavedTourists(): LiveData<List<TouristEntity>> = touristDao.getTouristsList()
-    fun getSavedNewsFeed(): LiveData<List<NewsFeedEntity>> = newsFeedDao.getnewsFeedList()
-    suspend fun getItems(page: Int, pageSize: Int): Result<List<TouristList>> {
-        val response = apiService.getTouristList(page)
-        var totalpage = response.body()!!.totalPages
-        var touristlist = response.body()!!.data.map {
-            TouristList(id = it.id, name = it.touristName)
-        }
-
-        delay(2000L)
+            delay(2000L)
         val startingIndex = page * pageSize
         return if (startingIndex + pageSize <= totalpage) {
             Result.success(
@@ -96,6 +78,13 @@ class TouristsRepository(
             )
         } else Result.success(emptyList())
     }
-
+    fun mapToDomainModel(model: NewsFeedListResponse):List<NewsFeedEntity>{
+        val result =
+            model.data.map {
+                NewsFeedEntity(id = it.id, commentCount = it.commentCount?:0,
+                    title = it.title?:"not available", description = it.description?:"not available",
+                    userName = it.user.name?:"not available", userPPic = it.user.profilepicture?:"not available",)}
+        return result?: emptyList()
+    }
 
 }

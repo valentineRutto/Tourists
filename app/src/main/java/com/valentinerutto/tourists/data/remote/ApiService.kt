@@ -11,7 +11,7 @@ interface ApiService {
     @GET("/api/Tourist")
     suspend fun getTouristList(@Query("page") page:Int): Response<TouristsListResponse>
     @GET("/api/Feed/GetNewsFeed")
-    suspend fun getNewsFeed(@Query("page") page:Int): Response<NewsFeedListResponse>
+    suspend fun getNewsFeed(): Response<NewsFeedListResponse>
     @GET("/api/Tourist/{id}")
     suspend fun getTouristDetails(@Path("id") id : Int): Response<TouristsListResponse>
 }

@@ -1,7 +1,7 @@
 package com.valentinerutto.tourists.ui.theme.views
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,10 +12,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,14 +24,14 @@ import com.valentinerutto.tourists.ui.TouristsViewmodel
 fun NewsFeedListScreen(touristsViewmodel: TouristsViewmodel,
                        modifier: Modifier) {
 
-    LaunchedEffect(true) {
-        touristsViewmodel.newGetFeed()
-    }
-
     val news = touristsViewmodel.news.collectAsState().value
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
 
-    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+        item {
+            Header("News Feed List")
+            Spacer(modifier = Modifier.height(16.dp))
 
+        }
         itemsIndexed(news) { index, newsfeed ->
 
             NewsItem(
@@ -57,21 +55,20 @@ fun NewsItem(
         ),
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .size(width = 240.dp, height = 100.dp)
+            .padding(8.dp).fillMaxSize()
     ) {
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(4.dp).padding(16.dp))
         ImageComposable(imageUrl = news.userPPic)
 
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = news.title, fontWeight = FontWeight.SemiBold,
+            text = news.title?:"not available", fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = news.description, fontSize = 16.sp,
+            text = news.description?:"not available", fontSize = 16.sp,
             fontWeight = FontWeight.Light
         )
         Spacer(modifier = Modifier.height(4.dp))

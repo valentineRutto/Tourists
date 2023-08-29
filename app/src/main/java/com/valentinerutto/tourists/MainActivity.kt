@@ -3,7 +3,6 @@ package com.valentinerutto.tourists
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +12,7 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -23,8 +23,6 @@ import com.valentinerutto.tourists.ui.theme.views.BottomNavigationBar
 import com.valentinerutto.tourists.ui.theme.views.NavHost
 import com.valentinerutto.tourists.util.NavigationType
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 //    private val touristsViewmodel:TouristsViewmodel by viewModel()
@@ -33,12 +31,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TouristsTheme {
-                 val touristsViewmodel:TouristsViewmodel by inject()
+                val touristsViewmodel: TouristsViewmodel by inject()
 
+                LaunchedEffect(true) {
+                    touristsViewmodel.getTourists()
+                    touristsViewmodel.fetchNewsFeed()
+                }
                 val windowSizeClass = calculateWindowSizeClass(activity = this)
                 AppNavigationSetUp(
-                    touristsViewmodel = touristsViewmodel,
-                    windowSizeClass.widthSizeClass
+                    touristsViewmodel = touristsViewmodel, windowSizeClass.widthSizeClass
                 )
 
             }

@@ -12,7 +12,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -27,15 +26,16 @@ fun TouristsListScreen(
     onTouristSelected: (touristItemPosition: Int) -> Unit,
     modifier: Modifier
 ) {
-    
-    LaunchedEffect(true) {
-        touristsViewmodel.getTourists()
-    }
 
    val tourists = touristsViewmodel.tourists.collectAsState().value
 
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
 
+        item {
+            Header("Tourists List")
+            Spacer(modifier = Modifier.height(16.dp))
+
+        }
         itemsIndexed(tourists) { index, tourist ->
 
             TouristItem(
