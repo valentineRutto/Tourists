@@ -32,7 +32,7 @@ val appModules = module {
 
     single { AppDatabase.getDatabase(context = androidContext()) }
 
-    single { TouristsRepository(get(), touristDao = database().touristDao()) }
+    single { TouristsRepository(get(), touristDao = database().touristDao(), newsFeedDao = database().newsFeedDao()) }
 
     viewModel { TouristsViewmodel(get()) }
 }

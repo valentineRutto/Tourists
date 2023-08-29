@@ -4,13 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.valentinerutto.tourists.data.local.dao.NewsFeedDao
 import com.valentinerutto.tourists.data.local.dao.TouristDao
 import com.valentinerutto.tourists.util.Constants
 import kotlinx.coroutines.CoroutineScope
 
-@Database(exportSchema = false, version = 1, entities = [TouristEntity::class])
+@Database(exportSchema = false, version = 1, entities = [TouristEntity::class,NewsFeedEntity::class])
 abstract class AppDatabase: RoomDatabase() {
     abstract fun touristDao(): TouristDao
+    abstract fun newsFeedDao(): NewsFeedDao
 
 
 
